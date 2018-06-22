@@ -42,5 +42,35 @@ gcc log_to_server.c –o trans
 # 程序原理
 中转程序实时从内核中抽取出`CSI`，然后传递给`CSILive`，`CSILive`实时解析和显示这些数据。
 
+# 如何实时显示CSI数据？
+首先保证你的机器安装有5300网卡。
+接下来运行`CSILive`程序，先进入`CSILive.py`所在路径，然后执行
+```shell
+python CSILive.py
+```
+跑起来之后，先让`CSILive`监听。
+然后运行前面编译好的`trans`程序。
+```shell
+./trans
+```
+此时中转程序就从内核中提取出**CSI**，然后通过tcp协议将`CSI`转发给`CSILive`。
+
+# 如何重播`.dat`文件?
+首先保证你的机器安装有5300网卡。
+接下来运行`CSILive`程序，先进入`CSILive.py`所在路径，然后执行
+```shell
+python CSILive.py
+```
+跑起来之后，先让`CSILive`处于监听状态。
+
+将你之前搜集的`CSI`数据文件(带`.dat`后缀)放入`fakeClient`文件夹，运行`fakeClient.py`即可。
+```shell
+python fakeClient.py
+```
+`fakeClient`实际上充当了前面`trans`的功能。
+
+
+
+
 
 
